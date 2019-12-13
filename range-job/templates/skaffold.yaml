@@ -1,0 +1,15 @@
+apiVersion: skaffold/v1
+kind: Config
+build:
+  artifacts:
+    - image: <CHARTNAME>
+deploy:
+  helm:
+    releases:
+      - name: <CHARTNAME>
+        chartPath: ""
+        setValueTemplates:
+          image.repository: "{{.IMAGE_NAME}}"
+          image.tag: "{{.DIGEST_HEX}}"
+        valuesFiles:
+          - ""
